@@ -1,8 +1,8 @@
-
-const main = (props) => {
+import Top from './Top'
+const Main = () => {
     return (
-    <p>{props.text}</p>
-    )
+    <Top/>
+    );
 }
 
-export default main
+export default Main;
