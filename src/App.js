@@ -13,7 +13,7 @@ function App() {
       <meta name="og:image" content="Logo.png"/>
     </head>
     <header/>
-    <main text = "this is a bunch of text sent down as props"/>
+    <main text = "this is a bunch of text pushed down down as props"/>
     <footer/>
     </>
   );
