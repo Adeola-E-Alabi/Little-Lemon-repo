@@ -7,7 +7,7 @@ const Top = (props) => {
             <div className = "top-p">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacinia, libero in vestibulum fermentum, </p>
             </div>
-            <button type = "btn-btn-primary">Reserve a table</button>
+            <button id = "reserve-button" type = "btn-btn-primary">Reserve a table</button>
         </div>
     )
 }

@@ -1,7 +1,9 @@
 const Footer = () => {
 
     return(
-        <h2>bye</h2>
+        <div className = "caption">
+            <p>copyright 2020</p>
+        </div>
     )
 }
 

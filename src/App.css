@@ -1,10 +1,5 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.all{
+  background-color:#EDEFEE;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -55,6 +50,9 @@ li {
   margin: 15px;
   color:black;
   text-decoration: none;
+  list-style: none;
+  font-size: x-large;
+  font-weight: 700;
 }
 
 a {text-decoration: none;}
@@ -70,7 +68,7 @@ a {text-decoration: none;}
   background-color:#495E57;
   padding-left:5vw;
   width:100vw;
-  height:25vh;
+  height:33vh;
 }
 
 .top button{
@@ -81,32 +79,129 @@ a {text-decoration: none;}
 
 .top h1{
   color: #F4CE14;
-  font-family: 'Karla';
-  font-weight: 600;
-  line-height: 0;
-  letter-spacing: 0;
-  border-radius: 160px;
+  font-family: "Markazi Text", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 67px;
+  margin:0px;
 }
 
 .top h2{
-  margin-top: 3vw;
-  font-family: 'Karla';
-  font-weight: medium;
-  line-height: 0;
-  letter-spacing: 0;
+  font-family: "Markazi Text", system-ui;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 40px;
+  margin:0px;
   color:#EDEFEE;
+  position: relative;
+  bottom:10px;
 }
 
 .top-p{
-  width:25vw;
+  width:17vw;
   height: 5vw;
 }
 
 .top-p p{
-  font-family: 'Karla';
-  font-weight: normal;
-  letter-spacing: 0;
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: lighter;
+  font-style: normal;
   color:#EDEFEE;
-  font-size: 11px;
+  font-size: 15px;
   text-wrap: wrap;
+}
+
+#reserve-button{
+  position: relative;
+  bottom:2vh;
+  height:3vw;
+  width:12vw;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Karla", sans-serif;
+  font-optical-sizing: auto;
+}
+
+button {
+  cursor:pointer;
+}
+
+.dishImage{
+  position: absolute;
+  top:0px;
+  left:0px;
+  border-radius:15px 15px 0px 0px;
+  width:20vw;
+}
+
+.dishes{
+  display:flex;
+  justify-content: space-around;
+  padding:2vw;
+  height: 45vh;
+}
+
+#dishSection-Title{
+  width:100vw;
+  height: 5vh;
+}
+
+#dishTitle h3{
+  position:relative;
+  top:17vh;
+  color:black;
+}
+
+#dishTitle h3:nth-child(even){
+  position:relative;
+  top:17vh;
+  color:orange;
+}
+
+#dishTitle{
+  display:flex;
+  justify-content: space-between;
+  position:relative;
+  top:15px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.card{
+  position:relative;
+  height: 50vh;
+  width:20vw;
+  background-color: white;
+  border:solid;
+  border-color: black;
+  border-radius: 15px;
+}
+
+
+
+#logo{
+  height:75px;
+}
+#dishSection{
+   margin-top:20vh;
+}
+.card-description{
+  position:relative;
+  top:17vh;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.card-description p:nth-child(even){
+  font-weight:bold;
+}
+
+.caption{
+  display:flex;
+  justify-content: center;
+  background-color: #495E57;
+  color:#EDEFEE
 }

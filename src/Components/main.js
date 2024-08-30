@@ -1,7 +1,11 @@
 import Top from './Top'
+import Specials from './Special'
 const Main = () => {
     return (
-    <Top/>
+        <div className = "main">
+            <Top/>
+            <Specials/>
+        </div>
     );
 }
 
