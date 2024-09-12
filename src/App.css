@@ -36,7 +36,7 @@
 nav{
   display:flex;
   flex-direction: row;
-  justify-content: right;
+  justify-content: center;
 }
 
 
@@ -64,11 +64,12 @@ a {text-decoration: none;}
 }
 
 .top{
-  display: inline-block;
+  display: grid;
   background-color:#495E57;
   padding-left:5vw;
   width:100vw;
   height:33vh;
+  grid-template-areas: "top-left top-right";
 }
 
 .top button{
@@ -114,6 +115,35 @@ a {text-decoration: none;}
   text-wrap: wrap;
 }
 
+.top-right{
+ grid-area:"top-right"
+}
+
+.top-right-img{
+  position:relative;
+  top:10vh;
+  overflow: hidden;
+  height: 17vw;
+  width:15vw;
+  border-radius: 10%;
+  margin-left:12vw;
+  margin-right:auto;
+}
+
+.top-right-img img{
+  height:22vw;
+  padding-left: auto;
+  padding-right:auto;
+}
+
+.top-left{
+  grid-area:"top-left"
+}
+
+button {
+  cursor:pointer;
+}
+
 #reserve-button{
   position: relative;
   bottom:2vh;
@@ -125,12 +155,19 @@ a {text-decoration: none;}
   font-optical-sizing: auto;
 }
 
-button {
-  cursor:pointer;
+
+
+.card-description{
+  position:relative;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.card-description p:nth-child(even){
+  font-weight:bold;
 }
 
 .dishImage{
-  position: absolute;
   top:0px;
   left:0px;
   border-radius:15px 15px 0px 0px;
@@ -141,62 +178,92 @@ button {
   display:flex;
   justify-content: space-around;
   padding:2vw;
-  height: 45vh;
+  grid-area: dishes;
+  margin-top:auto;
+  margin-bottom:auto;
 }
 
-#dishSection-Title{
-  width:100vw;
-  height: 5vh;
-}
+
 
 #dishTitle h3{
-  position:relative;
-  top:17vh;
   color:black;
 }
 
 #dishTitle h3:nth-child(even){
-  position:relative;
-  top:17vh;
   color:orange;
 }
 
 #dishTitle{
   display:flex;
   justify-content: space-between;
-  position:relative;
-  top:15px;
   padding-left:10px;
   padding-right:10px;
 }
 
 .card{
-  position:relative;
   height: 50vh;
-  width:20vw;
+  width:17vw;
   background-color: white;
   border:solid;
   border-color: black;
   border-radius: 15px;
 }
 
+.card img{
+  width:inherit;
+}
 
+.card-footer{
+  height: 15px;
+  display: flex;
+  justify-content: space-evenly;
+}
 
 #logo{
   height:75px;
 }
 #dishSection{
-   margin-top:20vh;
-}
-.card-description{
-  position:relative;
-  top:17vh;
-  padding-left: 10px;
-  padding-right: 10px;
+  display:grid;
+  margin-top:10vh;
+  margin-bottom:10vh;
+  grid-template-columns: 15vw auto 15vw;
+  grid-template-rows:10vh 50vh;
+  grid-template-areas:
+  "dishSection-Title dishSection-Title dishSection-Title"
+  "arrow-left dishes arrow-right";
 }
 
-.card-description p:nth-child(even){
-  font-weight:bold;
+#dishSection-Title{
+  width:100vw;
+  height: inherit;
+  font-size: 2em;
+  grid-area:dishSection-Title;
+}
+
+#dishSection-Title H1{
+  margin-left: auto;
+  margin-right:auto;
+}
+
+
+.arrow-left{
+  grid-area:arrow-left;
+  height:50px;
+  width:50px;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: 25px;
+  margin-bottom: auto;
+}
+
+.arrow-right{
+  grid-area:arrow-right;
+  height:50px;
+  width:50px;
+  margin-top: auto;
+  margin-left: 25px;
+  margin-right: auto;
+  margin-bottom: auto;
 }
 
 .caption{
