@@ -1,9 +1,9 @@
-import Top from './Top'
+import Chicago from './Top'
 import Specials from './Special'
 const Main = () => {
     return (
         <div className = "main">
-            <Top/>
+            <Chicago/>
             <Specials/>
         </div>
     );

@@ -6,14 +6,14 @@ const Card = (props) => {
         <article className = "card">
             <img src = {props.dish} alt = "" className = "dishImage"/>
             <div id ="dishTitle">
-                <h3 >Greek Salad</h3>
-                <h3 >$12.99</h3>
+                <h3>{props.title}</h3>
+                <h3>{props.price}</h3>
             </div>
             <div className = "card-description">
-                <p>Little lemon: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacinia, libero in vestibulum fermentum, </p>
+                <p>{props.description}</p>
                 <div className="card-footer">
                     <p>Order Delivery</p>
-                    <FontAwesomeIcon icon = {faTruck}/>
+                    <span><FontAwesomeIcon icon = {faTruck}/></span>
                 </div>
             </div>
         </article>

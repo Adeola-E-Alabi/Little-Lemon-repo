@@ -1,5 +1,5 @@
 import top from "../images/top.jpg"
-const Top = (props) => {
+const Chicago = (props) => {
     return (
         <div className = "top">
             <div className="top-left">
@@ -19,4 +19,4 @@ const Top = (props) => {
     )
 }
 
-export default Top
+export default Chicago

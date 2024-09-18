@@ -2,9 +2,9 @@
   background-color:#EDEFEE;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (max-width:500px) {
+  .dishes{
+    
   }
 }
 
@@ -161,6 +161,7 @@ button {
   position:relative;
   padding-left: 10px;
   padding-right: 10px;
+  font-size: 1em;
 }
 
 .card-description p:nth-child(even){
@@ -184,9 +185,9 @@ button {
 }
 
 
-
 #dishTitle h3{
   color:black;
+  font-size:1em;
 }
 
 #dishTitle h3:nth-child(even){
@@ -201,9 +202,9 @@ button {
 }
 
 .card{
-  height: 50vh;
-  width:17vw;
-  background-color: white;
+  height: 450px;
+  width: 250px;;
+  background-color: #EDEFEE;
   border:solid;
   border-color: black;
   border-radius: 15px;
@@ -214,10 +215,21 @@ button {
 }
 
 .card-footer{
-  height: 15px;
+  background-color: #F4CE14;
+  border:solid;
+  border-color: #282c34;
+  border-width: 2px;
+  border-radius: 16px;
+  margin-top:5vh;
+  height: 2vh;
+  width:8vw;
   display: flex;
   justify-content: space-evenly;
 }
+.card-footer p{
+  margin:0;
+}
+
 
 #logo{
   height:75px;
@@ -240,7 +252,7 @@ button {
   grid-area:dishSection-Title;
 }
 
-#dishSection-Title H1{
+#dishSection-Title h1{
   margin-left: auto;
   margin-right:auto;
 }
@@ -266,9 +278,56 @@ button {
   margin-bottom: auto;
 }
 
-.caption{
+.Reviews{
+  height:10vh;
+  width:30vw;
+  background-color: #EDEFEE;
+  padding:0px;
   display:flex;
+  margin-left:auto;
+  margin-right:auto;
+  overflow: hidden;
+}
+
+.Feedback{
+  display:block;
+  width:inherit;
+  height:inherit;
+  flex-shrink: 0;
+  flex-grow:0;
+  transition: translate 300ms ease-in-out;
+}
+
+.Feedback center{
+  transition: translate 300ms ease-in-out;
+}
+
+.Feedback p{
+  margin-left:auto;
+  margin-right:auto;
+  width:inherit;
+}
+
+.caption{
+  display:grid;
+  grid-template-areas: "img"
+                      "p";
   justify-content: center;
   background-color: #495E57;
   color:#EDEFEE
+}
+
+.caption p{
+  grid-area:p;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+
+.caption img{
+  grid-area:img;
+}
+
+.Reviews {
+  border:none;
 }
