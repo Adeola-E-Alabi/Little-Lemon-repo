@@ -1,18 +1,24 @@
-
-import "./App.css"
-import Header from './Components/header'
-import Main from './Components/main'
-import Footer from './Components/footer'
-import {useState} from 'react'
+import "./App.css";
+import Home from './pages/home.js';
+import Header from './Components/header.js'
+import {Route, Routes} from "react-router-dom";
+import { ChakraProvider } from "@chakra-ui/react";
+import Reservations from "./pages/Reservations.js";
 
 function App() {
-  const [thin, setThin] = useState(window.innerWidth)
+
   return (
-    <div className = "all">
-      <Header/>
-      <Main/>
-      <Footer/>
-    </div>
+    <>
+      <div>
+        <Header/>
+      </div>
+      <>
+        <Routes>
+          <Route path = "/" element = {<Home/>}/>
+          <Route path = "/Reservations" element = {<Reservations/>}/>
+        </Routes>
+      </>
+    </>
   );
 }
 

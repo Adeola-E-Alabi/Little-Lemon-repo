@@ -19,7 +19,7 @@ const Testimonial = () => {
         <div className = "Reviews" onClick={Change}>
                 {reviews.map(words => (
                     <div className="Feedback">
-                        <center key = {reviews[Reviewindex[2]]} style = {{translate:`${-100 * Reviewindex}%`}}> {words} </center>
+                        <center key = {reviews[Reviewindex]} style = {{translate:`${-100 * Reviewindex}%`}}> {words} </center>
                     </div>
                 ))}
         </div>

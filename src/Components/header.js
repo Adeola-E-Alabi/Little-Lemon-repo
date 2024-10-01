@@ -1,5 +1,7 @@
 import Flex from "./flex";
 import img1 from '../images/Hammock.jpg';
+import ResPag from "./BookingPage";
+import {Link, useMatch, useResolvedPath} from "react-router-dom"
 
 const Header = () => {
 
@@ -9,12 +11,12 @@ const Header = () => {
             <img src = {img1} id = "logo"/>
             <ul  className = "">
                 <Flex>
-                    <a href = ""><li>Home</li></a>
-                    <a href = ""><li>About</li></a>
-                    <a href = ""><li>Menu</li></a>
-                    <a href = ""><li>Reservation</li></a>
-                    <a href = ""><li>Login</li></a>
-                    <a href = ""><li>Order Online</li></a>
+                    <Link to = "/"><li>Home</li></Link>
+                    <a href = "/About"><li>About</li></a>
+                    <a href = "/Menu"><li>Menu</li></a>
+                    <Link to = "/Reservations"><li>Reservation</li></Link>
+                    <a href = "/Login"><li>Login</li></a>
+                    <a href = "/Order Online"><li>Order Online</li></a>
                 </Flex>
             </ul>
         </nav>

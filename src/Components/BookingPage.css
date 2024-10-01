@@ -1,0 +1,186 @@
+
+
+.ResPag{
+    width: 375px;
+    height:110vh;
+    margin-left: auto;
+    margin-right:auto;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    background-color:#EDEFEE;
+    border:solid;
+    border-color:#495E57;
+    border-radius: 16px;
+}
+
+.GuestInfo{
+    margin-top:2%;
+    height: 20vh;
+    width:75%;
+    background-color: inherit;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.GuestInfo p{
+    font-family: "Karla", sans-serif;
+    font-size: large;
+}
+
+header{
+    position:relative;
+    bottom:0px;
+    width:100%;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align:center;
+    background-color:#F4CE14;
+    font-family: "Markazi Text", system-ui;
+    font-size: large;
+}
+
+.contactForm{
+    display:flex;
+    flex-direction: column;
+    height:20%;
+    width:75%;
+    justify-content: space-evenly;
+    font-family: "Karla", sans-serif;
+}
+
+.GuestRegistration{
+    height:70%;
+    width: 100%;
+    display:flex;
+    justify-content:space-between;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.GuestRegistration h3{
+    font-family: "Markazi Text", system-ui;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: x-large;
+}
+
+#B{
+    border-top:solid;
+    border-bottom:solid;
+    border-width: 2px;
+    border-color:rgba(0, 0, 0, 0.15);
+}
+
+.GuestRegistration button{
+    background-color: inherit;
+    border:none;
+}
+
+.Buttons{
+    width:fit-content;
+    display:flex;
+    margin-right:10%;
+}
+
+.Banner{
+    background-color: #495E57;
+    width:100%;
+}
+
+.Banner h2{
+    font-family: "Markazi Text", system-ui;
+    font-size: 30px;
+    color:#EDEFEE;
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contactBanner{
+    margin-top:10%;
+    margin-bottom:5%;
+    background-color: #495E57;
+    width:100%;
+}
+
+#contactBanner{
+    font-family: "Markazi Text", system-ui;
+    font-size: 30px;
+    color:#EDEFEE;
+    width:fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contactInfo{
+    display:flex;
+    justify-content:center;
+    width:fit-content;
+    margin-right:auto;
+    margin-left:auto;
+}
+.DateTime{
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    height:10vh;
+}
+
+.Date{
+    margin-top:1vh;
+    width:100%;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+#Confirmation{
+    background-color: #BDBFBE;
+    width:fit-content;
+    border-radius: 16px;
+    border:solid;
+    border-width: 2px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#Confirmation *{
+    padding:2px;
+}
+
+#submit-button{
+    height:50px;
+    width:200px;
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 700;
+    font-family: "Karla", sans-serif;
+    font-optical-sizing: auto;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+.submitButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    top:0vh;
+}
+
+input{
+    text-align: center;
+    font-family: "Karla", sans-serif;
+    font-weight: 600;
+}
+
+button{
+    border-radius:16px;
+    background-color:#F4CE14;
+    color:black
+  }
+
+select{
+    width:67%;
+}
