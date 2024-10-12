@@ -40,7 +40,7 @@ const BookingPage = (props) =>{
                         <select id = "select">
                             {props.AvailableTimes.map(Times => {
                                 return(
-                                    <option value = {Times}>{Times}</option>
+                                    <option value = {Times} data-testid ={Times}> {Times}</option>
                                 )
                             })}
                         </select>

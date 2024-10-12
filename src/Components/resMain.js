@@ -13,17 +13,11 @@ const ACTIONS = {
 }
 
 
-const updateTimes = (AvailableTimes, action) => {
-    const Weekday = ["5:00 PM","6:00 PM","7:00 PM","8:00 PM"]
-    const Weekend = ["5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM"]
-
-    switch(action.type){
-        case(ACTIONS.DATE_CHANGE):
-            return Weekday
-    }
-}
 
 const Main = () => {
+
+    
+
     let d = new Date()
     var dd = String(d.getDate()).padStart(2, '0');
     var mm = String(d.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -112,14 +106,21 @@ const Main = () => {
     }
 
     const initialiseTimes = () => {
-        const initTime = Weekday? ["5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM"] :["5:00 PM","6:00 PM","7:00 PM","8:00 PM"]
+        const initTime = Weekday? ["5:00 PM","6:00 PM","7:00 PM","8:00 PM"] :["5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM"]
         return initTime
     }
 
+    const updateTimes = (AvailableTimes, action) => {
+            const WeekdaySchedule = ["5:00 PM","6:00 PM","7:00 PM","8:00 PM"]
+            const WeekendSchedule = ["5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM"]
+            const Schedule = Weekday? WeekdaySchedule : WeekendSchedule
+            return Schedule
+        }
     const [AvailableTimes, dispatch] = useReducer(updateTimes,initialiseTimes())
     return(
         <>
-            <BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={AvailableTimes} handleGuest ={handleGuest} change={change} date = {currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
+            <BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={AvailableTimes}
+                        handleGuest ={handleGuest} change={change} date = {currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
         </>
     )
 
