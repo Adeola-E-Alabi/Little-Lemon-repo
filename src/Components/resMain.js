@@ -3,7 +3,7 @@ import './BookingPage.css'
 import {Checkbox } from '@chakra-ui/react'
 import FormField from './FormFields'
 import Contact from './contact'
-import { useState, useReducer } from 'react'
+import { useState, useReducer, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClock} from '@fortawesome/free-solid-svg-icons'
 import { useReducedMotion } from "framer-motion"
@@ -15,8 +15,6 @@ const ACTIONS = {
 
 
 const Main = () => {
-
-    
 
     let d = new Date()
     var dd = String(d.getDate()).padStart(2, '0');
@@ -41,6 +39,7 @@ const Main = () => {
         console.log(Fname, Lname, Pnumb, Email)
     }
 
+    const [status,useStatus] = useState('idle')
 
     const handleGuest = event => {
         let Lment = event.currentTarget.id
@@ -105,9 +104,26 @@ const Main = () => {
         dispatch({type: "DATE_CHANGE"})
     }
 
+    const fetchAPIRef= useRef(null)
+    const submitAPIRef= useRef(null)
+    const APIdata= useRef(null)
+
+    useEffect(() => {
+        const API = async () => {const URl = 'https://raw.githubusercontent.com/courseraap/capstone/main/api.js'
+            await fetch(URl).then(response => response.text()).then(data => APIdata.current = data)
+            let x = APIdata.current + ` fetchAPIRef.current = fetchAPI; ` + `submitAPIRef.current = submitAPI;`
+            eval(x)
+        }
+        API()
+    },[])
+
+
     const initialiseTimes = () => {
-        const initTime = Weekday? ["5:00 PM","6:00 PM","7:00 PM","8:00 PM"] :["5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM"]
-        return initTime
+        if (fetchAPIRef.current) {
+                    let x = fetchAPIRef.current(new Date)
+                    console.log(x)
+                    dispatch({type: "DATE_CHANGE"})
+                }
     }
 
     const updateTimes = (AvailableTimes, action) => {
@@ -116,11 +132,13 @@ const Main = () => {
             const Schedule = Weekday? WeekdaySchedule : WeekendSchedule
             return Schedule
         }
-    const [AvailableTimes, dispatch] = useReducer(updateTimes,initialiseTimes())
+    const [AvailableTimes, dispatch] = useReducer(updateTimes,initialiseTimes)
     return(
         <>
-            <BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={AvailableTimes}
-                        handleGuest ={handleGuest} change={change} date = {currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
+            {(status == 'done')? <BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={AvailableTimes} handleGuest ={handleGuest} change={change} date = {currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
+                                : <BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={[]} handleGuest ={handleGuest} change={change} date = {currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
+            }
+
         </>
     )
 
