@@ -16,7 +16,7 @@ const Header = () => {
                     <a href = "/Menu"><li>Menu</li></a>
                     <Link to = "/Reservations"><li>Reservation</li></Link>
                     <a href = "/Login"><li>Login</li></a>
-                    <a href = "/Order Online"><li>Order Online</li></a>
+                    <Link to = "/OrderOnline"><li>Order Online</li></Link>
                 </Flex>
             </ul>
         </nav>

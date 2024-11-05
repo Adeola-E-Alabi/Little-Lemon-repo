@@ -1,4 +1,5 @@
 import BookingPage from "./BookingPage"
+import ConfirmedBooking from "./ConfirmedBooking"
 import './BookingPage.css'
 import {Checkbox } from '@chakra-ui/react'
 import FormField from './FormFields'
@@ -7,7 +8,8 @@ import { useState, useReducer, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClock} from '@fortawesome/free-solid-svg-icons'
 import { useReducedMotion } from "framer-motion"
-
+import { useNavigate } from "react-router-dom"
+import { useAvailability, useLoading} from "../context/APIcontext"
 const ACTIONS = {
     DATE_CHANGE: "DATE_CHANGE"
 }
@@ -15,31 +17,24 @@ const ACTIONS = {
 
 
 const Main = () => {
+    const navigate = useNavigate()
 
     let d = new Date()
     var dd = String(d.getDate()).padStart(2, '0');
-    var mm = String(d.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
     var yyyy = d.getFullYear();
     d = yyyy + '-' + mm + '-' + dd
 
     const [Adults, setAdults] = useState(0)
     const [Children, setChildren] = useState(0)
     const [Seniors, setSeniors] = useState(0)
-
+    const usableTimes = useRef(0)
     const [Fname, setFname] = useState(null)
     const [Lname, setLname] = useState(null)
     const [Pnumb, setPnumb] = useState(null)
     const [Email, setEmail] = useState(null)
     const [currentDate, setCurrentDate] = useState(d)
-
-    const submitForm = (event) =>{
-        setAdults(0)
-        setChildren(0)
-        setSeniors(0)
-        console.log(Fname, Lname, Pnumb, Email)
-    }
-
-    const [status,useStatus] = useState('idle')
+    const [initialData, setInitialData] = useState(null)
 
     const handleGuest = event => {
         let Lment = event.currentTarget.id
@@ -96,9 +91,6 @@ const Main = () => {
     }
 
 
-        const isWeekday = date => (date.getDay()+1) % 6 !== 0 && (date.getDay()+1) % 7 !== 0;
-
-        let Weekday = isWeekday(new Date(currentDate)) ;
     const changeDate = (event) => {
         setCurrentDate(event.currentTarget.value)
         dispatch({type: "DATE_CHANGE"})
@@ -107,41 +99,55 @@ const Main = () => {
     const fetchAPIRef= useRef(null)
     const submitAPIRef= useRef(null)
     const APIdata= useRef(null)
+    const [APIStatus, setAPIStatus] = useState("incomplete")
 
     useEffect(() => {
-        const API = async () => {const URl = 'https://raw.githubusercontent.com/courseraap/capstone/main/api.js'
-            await fetch(URl).then(response => response.text()).then(data => APIdata.current = data)
-            let x = APIdata.current + ` fetchAPIRef.current = fetchAPI; ` + `submitAPIRef.current = submitAPI;`
-            eval(x)
+        const API = async () => {
+            const URl = 'https://raw.githubusercontent.com/courseraap/capstone/main/api.js'
+            let APIAppend =  await fetch(URl).then(response => response.text()).then(data => APIdata.current = data) + ` fetchAPIRef.current = fetchAPI; ` + `submitAPIRef.current = submitAPI;`
+            eval(APIAppend)
+            setInitialData(fetchAPIRef.current(new Date))
         }
         API()
     },[])
 
+    const initialiseTimes = useAvailability(new Date)
 
-    const initialiseTimes = () => {
+    useEffect(() => {
+        if (fetchAPIRef.current){
+            dispatch(new Date)
+        }
+    }, initialData)
+
+    
+    const updateTimes = (AvailableTimes, action) => {
         if (fetchAPIRef.current) {
-                    let x = fetchAPIRef.current(new Date)
-                    console.log(x)
-                    dispatch({type: "DATE_CHANGE"})
-                }
+            let Times = fetchAPIRef.current(new Date (currentDate))
+            setAPIStatus('complete')
+            return Times
+        }
     }
 
-    const updateTimes = (AvailableTimes, action) => {
-            const WeekdaySchedule = ["5:00 PM","6:00 PM","7:00 PM","8:00 PM"]
-            const WeekendSchedule = ["5:00 PM","6:00 PM","7:00 PM","8:00 PM","9:00 PM","10:00 PM"]
-            const Schedule = Weekday? WeekdaySchedule : WeekendSchedule
-            return Schedule
+    const [AvailableTimes, dispatch] = useReducer(updateTimes, initialData,(data) => data)
+
+
+    const submitForm = (formData) =>{
+        setAdults(0)
+        setChildren(0)
+        setSeniors(0)
+        console.log(Fname, Lname, Pnumb, Email)
+
+        if (submitAPIRef.current(formData)==true){
+            navigate("/ConfirmedBooking")
         }
-    const [AvailableTimes, dispatch] = useReducer(updateTimes,initialiseTimes)
+    }
+
     return(
         <>
-            {(status == 'done')? <BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={AvailableTimes} handleGuest ={handleGuest} change={change} date = {currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
-                                : <BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={[]} handleGuest ={handleGuest} change={change} date = {currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
-            }
-
+            {(1==1)?<BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={AvailableTimes? AvailableTimes:['Please Select date']} handleGuest ={handleGuest} change={change} date = {(d) ?currentDate:currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
+            :<ConfirmedBooking/>}
         </>
     )
-
 }
 
 export default Main

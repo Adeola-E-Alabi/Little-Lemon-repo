@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons'
 import Card from './card'
 import{useState} from 'react'
-import { useScreenContext } from "../context/ScreenContext"
+import { useScreenContext } from "../context/APIcontext"
 
 const Specials = () => {
     const [width, setWidth] = useState(window.innerWidth);
