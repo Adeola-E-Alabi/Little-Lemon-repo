@@ -21,9 +21,9 @@ const BookingPage = (props) =>{
                 <h2>Guests</h2>
             </div>
                 <div className='GuestInfo'>
-                    <FormField click = {props.handleGuest} id = "A" Guest = "Adults" type ="text" label = "Adult" class = "PartySize" number = {props.Adults} />
-                    <FormField click = {props.handleGuest} id = "B" Guest = "Children" type ="text" label = "Child" class = "Date" number = {props.Children} />
-                    <FormField click = {props.handleGuest} id = "C" Guest = "Seniors" type ="text" label = "Senior" class = "Time" number = {props.Seniors} />
+                    <FormField click = {props.handleGuest} id = "A" role = "A" Guest = "Adults" type ="text" label = "Adult" class = "PartySize" number = {props.Adults} />
+                    <FormField click = {props.handleGuest} id = "B" role = "B" Guest = "Children" type ="text" label = "Child" class = "Date" number = {props.Children} />
+                    <FormField click = {props.handleGuest} id = "C" role = "C" Guest = "Seniors" type ="text" label = "Senior" class = "Time" number = {props.Seniors} />
                 </div>
                 <div className='Banner' id = "move">
                     <h2 className = "Banner">Contact Information</h2>
@@ -34,11 +34,11 @@ const BookingPage = (props) =>{
                     <Contact type ="text" label = "Phone Number" name = "phoneNumber" value = {props.Pnumb} onChange = {props.change}/>
                     <Contact type ="text" label = "Occasion" name = "Email" value = {props.Email} onChange = {props.change}/>
                 </div>
-                <div className = "Banner">
+                <div className = "Banner" role = 'Banner'>
                     <h2 className = "Banner">Date and Time</h2>
                 </div>
                 <div className='DateTime'>
-                    <input type = "date" value = {props.date} onChange={props.changeDate} min={[d]}></input>
+                    <input type = "date" role = 'calendar' value = {props.date} onChange={props.changeDate} min={[d]}></input>
                     <div className='Date'>
                         <select id = "select">
                             {props.AvailableTimes.map(Times => {

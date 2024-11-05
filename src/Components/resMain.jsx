@@ -17,7 +17,7 @@ const ACTIONS = {
 
 
 const Main = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate
 
     let d = new Date()
     var dd = String(d.getDate()).padStart(2, '0');

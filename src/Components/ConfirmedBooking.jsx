@@ -11,7 +11,7 @@ const ConfirmedBooking = (props) =>{
     const Message = (`Your Booking is confirmed for ${date}` )
     return(
             <div className='ConfirmationPage'>
-                <h1>Confirmed</h1>
+                <h1 role = "Confirmed">Confirmed</h1>
                 <FontAwesomeIcon icon="fa-solid fa-circle-check" size='3x' />
                 <p>{Message}</p>
             </div>
