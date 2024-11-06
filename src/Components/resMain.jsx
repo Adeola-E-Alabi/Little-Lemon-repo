@@ -1,15 +1,11 @@
 import BookingPage from "./BookingPage"
 import ConfirmedBooking from "./ConfirmedBooking"
 import './BookingPage.css'
-import {Checkbox } from '@chakra-ui/react'
-import FormField from './FormFields'
-import Contact from './contact'
 import { useState, useReducer, useEffect, useRef } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faClock} from '@fortawesome/free-solid-svg-icons'
-import { useReducedMotion } from "framer-motion"
 import { useNavigate } from "react-router-dom"
 import { useAvailability, useLoading} from "../context/APIcontext"
+import { Formik, useFormik } from "formik"
+import { basicSchema } from "../Schema"
 const ACTIONS = {
     DATE_CHANGE: "DATE_CHANGE"
 }
@@ -17,7 +13,7 @@ const ACTIONS = {
 
 
 const Main = () => {
-    const navigate = useNavigate
+    const navigate = useNavigate()
 
     let d = new Date()
     var dd = String(d.getDate()).padStart(2, '0');
@@ -43,7 +39,7 @@ const Main = () => {
             console.log("Error:", Lment)
         }
 
-        if (Lment == "A-"){
+        if (Lment == "A-" && Adults > 0){
             setAdults(Adults - 1)
             console.log("Error:", Lment)
         }
@@ -53,7 +49,7 @@ const Main = () => {
             console.log("Error:", Lment)
         }
 
-        if (Lment == "B-"){
+        if (Lment == "B-" && Children > 0){
             setChildren(Children - 1)
             console.log("Error:", Lment)
         }
@@ -63,12 +59,36 @@ const Main = () => {
             console.log("Error:", Lment)
         }
 
-        if (Lment == "C-"){
-            setSeniors(Seniors - 1)
+        if (Lment == "C-" && Seniors > 0){
+            setSeniors(Seniors - 1 )
             console.log("Error:", Lment)
         }
         event.preventDefault()
     }
+
+    const onSubmit = (event, values) =>{
+        setAdults(0)
+        setChildren(0)
+        setSeniors(0)
+        console.log("Fname, Lname, Pnumb, Email")
+
+        if (submitAPIRef.current(values)==true){
+            navigate("/ConfirmedBooking")
+        }
+    }
+
+    const formik = useFormik({
+        initialValues:{
+        firstName:"",
+        lastName:"",
+        phoneNumber:"",
+        email:"",
+        Occasion:""
+    },
+    validationSchema: basicSchema,
+    onSubmit,
+    })
+
 
     const change = (event) => {
         let Lment = event.currentTarget.name
@@ -90,12 +110,6 @@ const Main = () => {
         }
     }
 
-
-    const changeDate = (event) => {
-        setCurrentDate(event.currentTarget.value)
-        dispatch({type: "DATE_CHANGE"})
-    }
-
     const fetchAPIRef= useRef(null)
     const submitAPIRef= useRef(null)
     const APIdata= useRef(null)
@@ -113,13 +127,6 @@ const Main = () => {
 
     const initialiseTimes = useAvailability(new Date)
 
-    useEffect(() => {
-        if (fetchAPIRef.current){
-            dispatch(new Date)
-        }
-    }, initialData)
-
-    
     const updateTimes = (AvailableTimes, action) => {
         if (fetchAPIRef.current) {
             let Times = fetchAPIRef.current(new Date (currentDate))
@@ -130,21 +137,27 @@ const Main = () => {
 
     const [AvailableTimes, dispatch] = useReducer(updateTimes, initialData,(data) => data)
 
-
-    const submitForm = (formData) =>{
-        setAdults(0)
-        setChildren(0)
-        setSeniors(0)
-        console.log(Fname, Lname, Pnumb, Email)
-
-        if (submitAPIRef.current(formData)==true){
-            navigate("/ConfirmedBooking")
+    useEffect(() => {
+        if (fetchAPIRef.current){
+            dispatch(new Date)
         }
+    }, initialData)
+
+    const changeDate = (event) => {
+        setCurrentDate(event.currentTarget.value)
+        dispatch({type: "DATE_CHANGE"})
     }
 
     return(
         <>
-            {(1==1)?<BookingPage Adults={Adults} Children={Children} Seniors={Seniors} Fname={Fname} Lname={Lname} Pnumb={Pnumb} Email={Email} AvailableTimes={AvailableTimes? AvailableTimes:['Please Select date']} handleGuest ={handleGuest} change={change} date = {(d) ?currentDate:currentDate} changeDate = {changeDate} submitForm = {submitForm}/>
+            {(1==1)?<BookingPage Adults={Adults}
+                                 Children={Children}
+                                 Seniors={Seniors}
+                                 AvailableTimes={AvailableTimes? AvailableTimes:['Please Select date']}
+                                 handleGuest ={handleGuest}
+                                 date = {(d) ?currentDate:currentDate}
+                                 changeDate = {(changeDate)}
+                                 formik = {formik}/>
             :<ConfirmedBooking/>}
         </>
     )

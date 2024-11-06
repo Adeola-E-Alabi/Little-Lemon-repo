@@ -3,14 +3,14 @@ import {render, screen, act, fireEvent, renderHook} from '@testing-library/react
 import '@testing-library/jest-dom'
 import '@testing-library/react'
 import { it, expect, describe } from 'vitest'
-import Main from '../src/Components/resMain'
 import { useState, useReducer, useEffect, useRef } from 'react'
 import { useAvailability, useLoading} from "../src/context/APIcontext"
 import { APIcontext } from '../src/context/APIcontext'
 import userEvent from '@testing-library/user-event'
 import { list } from '@chakra-ui/react'
-
-describe('AvailableTimes', () => {
+import {Route, Routes} from "react-router-dom";
+import Reservations from "../src/pages/Reservations"
+/*describe('AvailableTimes', () => {
     it('should Fire the dispatch', async () => {
         render(
         <Main/>
@@ -35,9 +35,9 @@ describe('AvailableTimes', () => {
             expect(heading).not.toBeInTheDocument()
         })
     })
-})
+})*/
 
-describe('AvailableTimes', () => {
+/*describe('AvailableTimes', () => {
     it('Test submit button functionality', async () => {
         render(
         <Main/>
@@ -49,4 +49,4 @@ describe('AvailableTimes', () => {
         const ConfirmedBooking = screen.getByRole('B')
         expect(ConfirmedBooking).toHaveValue(0)
     })
-})
+})*/

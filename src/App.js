@@ -3,7 +3,7 @@ import Home from './pages/home.js';
 import Header from './Components/header.jsx'
 import {Route, Routes} from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import Reservations from "./pages/Reservations.js";
+import Reservations from "./pages/Reservations.jsx";
 import OrderOnline from "./Components/orderOnline.jsx"
 import ConfirmedBooking from "./Components/ConfirmedBooking.jsx";
 import { APIcontext } from "./context/APIcontext.jsx";

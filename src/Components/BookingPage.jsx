@@ -4,16 +4,11 @@ import FormField from './FormFields'
 import Contact from './contact'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClock} from '@fortawesome/free-solid-svg-icons'
-
+import { useEffect } from 'react'
 const BookingPage = (props) =>{
-    let d = new Date()
-    var dd = String(d.getDate()).padStart(2, '0');
-    var mm = String(d.getMonth() + 1).padStart(2, '0');
-    var yyyy = d.getFullYear();
-    d = yyyy + '-' + mm + '-' + dd
-
+    console.log(props.formik.errors.length)
     return(
-        <form className = "ResPag">
+        <form className = "ResPag" onSubmit={props.formik.handleSubmit}>
             <header>
                 <h1>Make a Reservation</h1>
             </header>
@@ -29,16 +24,66 @@ const BookingPage = (props) =>{
                     <h2 className = "Banner">Contact Information</h2>
                 </div>
                 <div className = "contactForm">
-                    <Contact type ="text" label = "First Name" name = "firstName" value = {props.Fname} onChange = {props.change}/>
-                    <Contact type ="text" label = "Last Name" name = "lastName" value = {props.Lname} onChange = {props.change}/>
-                    <Contact type ="text" label = "Phone Number" name = "phoneNumber" value = {props.Pnumb} onChange = {props.change}/>
-                    <Contact type ="text" label = "Occasion" name = "Email" value = {props.Email} onChange = {props.change}/>
+                    <Contact 
+                        className = {props.formik.errors.firstName && props.formik.touched.firstName? 'input-Error': "contactInfo"}
+                        type ="text"
+                        label = "First Name"
+                        name = "firstName"
+                        value = {props.formik.values.firstName}
+                        onChange = {props.formik.handleChange}
+                        onBlur = {props.formik.handleBlur}/>
+
+                    <Contact
+                        className = {props.formik.errors.lastName && props.formik.touched.lastName? 'input-Error': "contactInfo"}
+                        type ="text"
+                        label = "Last Name"
+                        name = "lastName"
+                        value = {props.formik.values.lastName}
+                        onChange = {props.formik.handleChange}
+                        onBlur = {props.formik.handleBlur}/>
+
+
+                    <Contact
+                        type ="text"
+                        className = {props.formik.errors.phoneNumber && props.formik.touched.phoneNumber? 'input-Error': "contactInfo"}
+                        label = "Phone Number"
+                        name = "phoneNumber"
+                        value = {props.formik.values.phoneNumber}
+                        onChange = {props.formik.handleChange}
+                        onBlur = {props.formik.handleBlur}/>
+
+                    <Contact
+                        type ="text"
+                        className = {props.formik.errors.Occasion && props.formik.touched.Occasion? 'input-Error': "contactInfo"}
+                        label = "Occasion"
+                        name = "Occasion"
+                        value = {props.formik.values.Occasion}
+                        onChange = {props.formik.handleChange}
+                        onBlur = {props.formik.handleBlur}/>
+
+                        <Contact
+                        type ="text"
+                        className = {props.formik.errors.email && props.formik.touched.email? 'input-Error': "contactInfo"}
+                        label = "Email"
+                        name = "email"
+                        value = {props.formik.values.email}
+                        onChange = {props.formik.handleChange}
+                        onBlur = {props.formik.handleBlur}/>
+
                 </div>
+
                 <div className = "Banner" role = 'Banner'>
                     <h2 className = "Banner">Date and Time</h2>
                 </div>
+
                 <div className='DateTime'>
-                    <input type = "date" role = 'calendar' value = {props.date} onChange={props.changeDate} min={[d]}></input>
+                    <input 
+                        type = "date"
+                        role = 'calendar'
+                        value = {props.date}
+                        onChange={props.changeDate}
+                        min={[props.d]}/>
+
                     <div className='Date'>
                         <select id = "select">
                             {props.AvailableTimes.map(Times => {
@@ -49,12 +94,27 @@ const BookingPage = (props) =>{
                         </select>
                         <FontAwesomeIcon icon={faClock} id = 'clock' />
                     </div>
+
                 </div>
+
                 <div className='submitButtons'>
                     <div id = "Confirmation">
                         <Checkbox>Recieve Email Confirmation</Checkbox>
                     </div>
-                    <button id = "submit-button" type = "submit" onClick = {props.submitForm}>Submit</button>
+                    <button id = "submit-button" type = "submit" disabled = {((props.formik.errors.firstName ||
+                                                                              props.formik.errors.lastName ||
+                                                                              props.formik.errors.phoneNumber ||
+                                                                              props.formik.errors.Occasion ||
+                                                                              props.formik.errors.email) &&
+                                                                              (props.formik.touched.firstName == true ||
+                                                                              props.formik.touched.lastName == true ||
+                                                                              props.formik.touched.phoneNumber == true ||
+                                                                              props.formik.touched.Occasion == true ||
+                                                                              props.formik.touched.email == true) ||
+                                                                              (props.Adults == 0 &&
+                                                                              props.Children == 0 &&
+                                                                              props.Seniors == 0))?
+                                                                              true:false} >Submit</button>
                 </div>
     </form>
     )

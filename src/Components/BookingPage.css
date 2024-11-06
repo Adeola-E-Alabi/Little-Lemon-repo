@@ -120,7 +120,19 @@ header{
     width:fit-content;
     margin-right:auto;
     margin-left:auto;
+    border-radius: 5px;
 }
+
+.input-Error{
+    display:flex;
+    justify-content:center;
+    width:fit-content;
+    margin-right:auto;
+    margin-left:auto;
+    border-color:red;
+    border-radius: 5px;
+}
+
 .DateTime{
     display:flex;
     flex-direction: column;
@@ -178,6 +190,12 @@ input{
 button{
     border-radius:16px;
     background-color:#F4CE14;
+    color:black
+  }
+
+  button:disabled{
+    border-radius:16px;
+    background-color:#f5e8a6;
     color:black
   }
 
