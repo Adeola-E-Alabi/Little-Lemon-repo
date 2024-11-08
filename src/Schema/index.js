@@ -4,8 +4,8 @@ import 'yup-phone'
 const ErrorMessage = "Required"
 export const basicSchema = yup.object().shape({
     email: yup.string().email("Please enter a valid email.").required(ErrorMessage),
-    firstName: yup.string().required(ErrorMessage),
-    lastName: yup.string().required(ErrorMessage),
+    firstName: yup.string().min(2).required(ErrorMessage),
+    lastName: yup.string().min(2).required(ErrorMessage),
     phoneNumber: yup.number().required(ErrorMessage),
-    Occasion: yup.string().max(30,"30 Character Limit")
+    occasion: yup.string().max(30).required()
 })

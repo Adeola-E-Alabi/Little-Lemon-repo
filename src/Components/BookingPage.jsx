@@ -5,8 +5,10 @@ import Contact from './contact'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClock} from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from 'react'
+import { useFormikContext } from 'formik'
 const BookingPage = (props) =>{
     console.log(props.formik.errors.length)
+    console.log("Touched:", props.formik.touched, "Errors:", props.formik.errors);
     return(
         <form className = "ResPag" onSubmit={props.formik.handleSubmit}>
             <header>
@@ -27,6 +29,7 @@ const BookingPage = (props) =>{
                     <Contact 
                         className = {props.formik.errors.firstName && props.formik.touched.firstName? 'input-Error': "contactInfo"}
                         type ="text"
+                        role = {props.formik.errors.firstName && props.formik.touched.firstName? "FirstNameError": "FirstName"}
                         label = "First Name"
                         name = "firstName"
                         value = {props.formik.values.firstName}
@@ -36,6 +39,7 @@ const BookingPage = (props) =>{
                     <Contact
                         className = {props.formik.errors.lastName && props.formik.touched.lastName? 'input-Error': "contactInfo"}
                         type ="text"
+                        role = {props.formik.errors.lastName && props.formik.touched.lastName? 'LastNameError': "LastName"}
                         label = "Last Name"
                         name = "lastName"
                         value = {props.formik.values.lastName}
@@ -46,6 +50,7 @@ const BookingPage = (props) =>{
                     <Contact
                         type ="text"
                         className = {props.formik.errors.phoneNumber && props.formik.touched.phoneNumber? 'input-Error': "contactInfo"}
+                        role = {props.formik.errors.phoneNumber && props.formik.touched.phoneNumber? 'PhoneNumberError': "PhoneNumber"}
                         label = "Phone Number"
                         name = "phoneNumber"
                         value = {props.formik.values.phoneNumber}
@@ -54,16 +59,18 @@ const BookingPage = (props) =>{
 
                     <Contact
                         type ="text"
-                        className = {props.formik.errors.Occasion && props.formik.touched.Occasion? 'input-Error': "contactInfo"}
+                        className = {props.formik.errors.occasion && props.formik.touched.occasion? 'input-Error': "contactInfo"}
+                        role = {props.formik.errors.occasion && props.formik.touched.occasion? 'OccasionError': "Occasion"}
                         label = "Occasion"
-                        name = "Occasion"
-                        value = {props.formik.values.Occasion}
+                        name = "occasion"
+                        value = {props.formik.values.occasion}
                         onChange = {props.formik.handleChange}
                         onBlur = {props.formik.handleBlur}/>
 
                         <Contact
                         type ="text"
                         className = {props.formik.errors.email && props.formik.touched.email? 'input-Error': "contactInfo"}
+                        role = {props.formik.errors.email && props.formik.touched.email? "EmailError": "Email"}
                         label = "Email"
                         name = "email"
                         value = {props.formik.values.email}
