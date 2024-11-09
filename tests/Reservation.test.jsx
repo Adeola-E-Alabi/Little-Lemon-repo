@@ -23,6 +23,10 @@ describe('Reservation Form First Name',  () => {
     )
         const FirstName = screen.getByRole("FirstName")
         const FirstNameError = screen.queryByRole("FirstNameError")
+        const Submit = screen.getByRole('Disabled')
+        const AntiSubmit = screen.queryByRole("Enabled")
+        expect(Submit).toBeInTheDocument()
+        expect(AntiSubmit).not.toBeInTheDocument()
         expect(FirstName).toBeInTheDocument()
         expect(FirstNameError).not.toBeInTheDocument()
     })
@@ -52,6 +56,10 @@ describe('Reservation Form Last Name', () => {
     )
         const LastName = screen.getByRole("LastName")
         const LastNameError = screen.queryByRole("LastNameError")
+        const Submit = screen.getByRole('Disabled')
+        const AntiSubmit = screen.queryByRole("Enabled")
+        expect(Submit).toBeInTheDocument()
+        expect(AntiSubmit).not.toBeInTheDocument()
         expect(LastName).toBeInTheDocument()
         expect(LastNameError).not.toBeInTheDocument()
     })
@@ -81,6 +89,10 @@ describe('Reservation Form Phone Number', () => {
     )
         const element = screen.getByRole("PhoneNumber")
         const elementError = screen.queryByRole("PhoneNumberError")
+        const Submit = screen.getByRole('Disabled')
+        const AntiSubmit = screen.queryByRole("Enabled")
+        expect(Submit).toBeInTheDocument()
+        expect(AntiSubmit).not.toBeInTheDocument()
         expect(element).toBeInTheDocument()
         expect(elementError).not.toBeInTheDocument()
     })
@@ -110,6 +122,10 @@ describe('Reservation Form Occasion', () => {
     )
         const Occasion = screen.getByRole("Occasion")
         const OccasionError = screen.queryByRole("OccasionError")
+        const Submit = screen.getByRole('Disabled')
+        const AntiSubmit = screen.queryByRole("Enabled")
+        expect(Submit).toBeInTheDocument()
+        expect(AntiSubmit).not.toBeInTheDocument()
         expect(Occasion).toBeInTheDocument()
         expect(OccasionError).not.toBeInTheDocument()
     })
@@ -123,7 +139,7 @@ describe('Reservation Form Occasion', () => {
 
         const element = screen.getByRole('Occasion');
         const user = userEvent.setup()
-        user.type(element, "'Something with more than thirty Characters in it'")
+        await user.type(element, "'Something with more than thirty Characters in it'")
         fireEvent.blur(element);
         const elementError = await screen.findByRole('OccasionError');
         expect(elementError).toBeInTheDocument();
@@ -139,6 +155,10 @@ describe('Reservation Form Email', () => {
     )
         const element = screen.getByRole("Email")
         const elementError = screen.queryByRole("EmailError")
+        const Submit = screen.getByRole('Disabled')
+        const AntiSubmit = screen.queryByRole("Enabled")
+        expect(Submit).toBeInTheDocument()
+        expect(AntiSubmit).not.toBeInTheDocument()
         expect(element).toBeInTheDocument()
         expect(elementError).not.toBeInTheDocument()
     })
@@ -156,5 +176,55 @@ describe('Reservation Form Email', () => {
         fireEvent.blur(element);
         const elementError = await screen.findByRole('EmailError');
         expect(elementError).toBeInTheDocument();
+    });
+})
+
+describe('Reservation Submit Button', () => {
+    it(`should render the Submit Button's role as Enabled`, async () => {
+        render(
+        <MemoryRouter>
+            <Main/>
+        </MemoryRouter>
+    )
+        const Submit = screen.getByTestId('SubmitButton')
+
+        const FirstName = screen.getByRole('FirstName')
+        const LastName = screen.getByRole('LastName')
+        const PhoneNumber = screen.getByRole('PhoneNumber')
+        const Occasion = screen.getByRole('Occasion')
+        const Email = screen.getByRole('Email')
+        
+        const Adults = screen.getByTestId('A+')
+        const Seniors = screen.getByTestId('A+')
+        const Children = screen.getByTestId('A+')
+        
+        const user = userEvent.setup()
+
+        await user.tripleClick(Adults)
+        fireEvent.blur(Adults);
+
+        await user.tripleClick(Seniors)
+        fireEvent.blur(Seniors);
+
+        await user.tripleClick(Children)
+        fireEvent.blur(Children);
+
+        await user.type(FirstName,"Adeola")
+        fireEvent.blur(FirstName);
+
+        await user.type(LastName,"Alabi")
+        fireEvent.blur(LastName);
+
+        await user.type(PhoneNumber,"7809723473")
+        fireEvent.blur(PhoneNumber);
+
+        await user.type(Occasion,"Wedding")
+        fireEvent.blur(Occasion);
+
+        await user.type(Email,"Adeola.E.Alabi@Gmail.com")
+        fireEvent.blur(Email);
+
+        expect(Submit).toHaveRole('Enabled')
+
     });
 })

@@ -6,9 +6,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faClock} from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from 'react'
 import { useFormikContext } from 'formik'
+import { useState } from 'react'
 const BookingPage = (props) =>{
     console.log(props.formik.errors.length)
     console.log("Touched:", props.formik.touched, "Errors:", props.formik.errors);
+    const [formValidation, setValidation] = useState(false)
+    useEffect(() => {
+        ((!(props.formik.errors.firstName ||
+            props.formik.errors.lastName ||
+            props.formik.errors.phoneNumber ||
+            props.formik.errors.Occasion ||
+            props.formik.errors.email) &&
+            (props.formik.touched.firstName == true ||
+            props.formik.touched.lastName == true ||
+            props.formik.touched.phoneNumber == true ||
+            props.formik.touched.Occasion == true ||
+            props.formik.touched.email == true)) &&
+            (props.Adults != 0 ||
+            props.Children != 0 ||
+            props.Seniors != 0))? setValidation(true) :setValidation(false)
+    }, [props])
     return(
         <form className = "ResPag" onSubmit={props.formik.handleSubmit}>
             <header>
@@ -108,20 +125,7 @@ const BookingPage = (props) =>{
                     <div id = "Confirmation">
                         <Checkbox>Recieve Email Confirmation</Checkbox>
                     </div>
-                    <button id = "submit-button" type = "submit" disabled = {((props.formik.errors.firstName ||
-                                                                              props.formik.errors.lastName ||
-                                                                              props.formik.errors.phoneNumber ||
-                                                                              props.formik.errors.Occasion ||
-                                                                              props.formik.errors.email) &&
-                                                                              (props.formik.touched.firstName == true ||
-                                                                              props.formik.touched.lastName == true ||
-                                                                              props.formik.touched.phoneNumber == true ||
-                                                                              props.formik.touched.Occasion == true ||
-                                                                              props.formik.touched.email == true) ||
-                                                                              (props.Adults == 0 &&
-                                                                              props.Children == 0 &&
-                                                                              props.Seniors == 0))?
-                                                                              true:false} >Submit</button>
+                    <button id = "submit-button" type = "submit" disabled = {!formValidation} role = {(formValidation == true)? 'Enabled': 'Disabled'} data-testid = "SubmitButton">Submit</button>
                 </div>
     </form>
     )

@@ -7,12 +7,12 @@ const FormField = (props) => {
         <div className = "GuestRegistration" id = {props.id}>
             <p>{props.Guest}</p>
             <div className = "Buttons">
-                <button onClick = {props.click} id = {props.id + "-"}>
+                <button onClick = {props.click} id = {props.id + "-"} data-testid = {props.id + "-"}>
                     <FontAwesomeIcon icon = {faMinus} size = "1x" id = {props.id + "-"}/>
                 </button>
                 <h3>{props.number}</h3>
                 <button onClick = {props.click} id ={ props.id + "+"}>
-                    <FontAwesomeIcon icon = {faPlus} size = "1x" id ={ props.id + "+"}/>
+                    <FontAwesomeIcon icon = {faPlus} size = "1x" id ={ props.id + "+"} data-testid = {props.id + "+"}/>
                 </button>
             </div>
         </div>
